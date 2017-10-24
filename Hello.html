@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="Hello.css"/>
+    <script type="text/javascript" src="Hello.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="three.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myButton").click(function(){
+                var x = $("#myButton").position();
+                alert("Top position: " + x.top + " Left position: " + x.left);
+            });
+        });
+    </script>
+    <!--<script>
+        $(document).mousemove(function(e){
+            $("#myText").css({left:e.pageX, top:e.pageY});
+            //$("#myText").stop().animate({left:e.pageX, top:e.pageY});
+        });
+    </script>-->
+</head>
+<body onload="timeSel(document.getElementById('myText'))" onmousemove="render(event)">
+Enter your name: <input title="myInput" type="text" name="myText" id="myText" >
+<button type="button" id="myButton" onclick="myFunc(document.getElementById('myText'))">Click</button>
+render();
+<!--<img src="ax.jpg" id="myImg">-->
+<!--<button type="submit" id="myButton" onclick="myFunc()">Click</button>-->
+<script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 1, 10000);
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+    document.body.appendChild(renderer.domElement);
+    var geometry = new THREE.BoxGeometry(700, 700, 700, 10, 10, 10);
+    var material = new THREE.MeshBasicMaterial({color: 0xfffff, wireframe: true});
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+    camera.position.z = 1000;
+    function render(e) {
+        //requestAnimationFrame(render);
+        cube.rotation.x = e.pageX/100;
+        cube.rotation.y = e.pageY/100;
+        cube.rotation.z = (e.pageX + e.pageY)/100;
+        renderer.render(scene, camera);
+    }
+</script>
+</body>
+</html>

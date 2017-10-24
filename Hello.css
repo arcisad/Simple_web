@@ -1,0 +1,12 @@
+.myCss1{
+    background-color: azure;
+    color: black;
+}
+.myCss2{
+    background-color: black;
+    color: white;
+}
+
+.pos{
+    position: absolute;
+}
